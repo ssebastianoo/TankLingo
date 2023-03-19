@@ -77,33 +77,35 @@
     {#if !loaded}
         <p>loading...</p>
     {:else}
-        <div class="container">
-            <div class="top">
-                <p class="points">
-                    {points}
-                    {points === 1 ? "point" : "points"}
-                </p>
-                <div class="pic">
-                    <img src={"/tanks/" + correctTank.file} alt="Tank" />
+        <div class="parent">
+            <div class="container">
+                <div class="top">
+                    <p class="points">
+                        {points}
+                        {points === 1 ? "Point" : "Points"}
+                    </p>
+                    <div class="pic">
+                        <img src={"/tanks/" + correctTank.file} alt="Tank" />
+                    </div>
                 </div>
-            </div>
-            <div class="guess">
-                <h2>What's this tank?</h2>
-                <div class="options">
-                    {#each allTanks as tank}
-                        <div
-                            class="option"
-                            data-name={tank.name}
-                            style={showCorrectOne &&
-                            tank.name === correctTank.name
-                                ? "background-color: #75ff6e"
-                                : ""}
-                            on:click|preventDefault={checkClick}
-                            on:keypress
-                        >
-                            <p>{tank.name}</p>
-                        </div>
-                    {/each}
+                <div class="guess">
+                    <h2>What's this tank?</h2>
+                    <div class="options">
+                        {#each allTanks as tank}
+                            <div
+                                class="option"
+                                data-name={tank.name}
+                                style={showCorrectOne &&
+                                tank.name === correctTank.name
+                                    ? "background-color: #75ff6e"
+                                    : ""}
+                                on:click|preventDefault={checkClick}
+                                on:keypress
+                            >
+                                <p>{tank.name}</p>
+                            </div>
+                        {/each}
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,7 +129,14 @@
         padding: 20px;
     }
 
+    .parent {
+        display: flex;
+        justify-content: center;
+    }
+
     .container {
+        width: 100%;
+        max-width: 500px;
         min-height: calc(100vh - 120px);
         display: flex;
         flex-direction: column;
@@ -153,7 +162,7 @@
     }
 
     .top {
-        height: calc(40vh - 120px);
+        min-height: calc(40vh - 120px);
     }
 
     .pic {
@@ -163,7 +172,7 @@
     }
 
     .guess {
-        height: calc(60vh - 120px);
+        min-height: calc(60vh - 120px);
         background-color: white;
         padding: 20px;
         border-top-left-radius: 40px;
