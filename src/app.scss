@@ -1,0 +1,13 @@
+$blue: #007cf8;
+
+@font-face {
+    font-family: "Inter";
+    src: url("/Inter-Regular.ttf");
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background-color: $blue;
+    font-family: "Inter";
+}
