@@ -98,23 +98,31 @@
                     </div>
                 </div>
                 <div class="guess">
-                    <h2>What's this tank?</h2>
-                    <div class="options">
-                        {#each allTanks as tank}
-                            <div
-                                class="option"
-                                data-name={tank.name}
-                                style={showCorrectOne &&
-                                tank.name === correctTank.name
-                                    ? "background:none;background-color: #75ff6e"
-                                    : ""}
-                                on:click|preventDefault={checkClick}
-                                on:keypress
-                            >
-                                <p>{tank.name}</p>
-                            </div>
-                        {/each}
+                    <div>
+                        <h2>What's this tank?</h2>
+                        <div class="options">
+                            {#each allTanks as tank}
+                                <div
+                                    class="option"
+                                    data-name={tank.name}
+                                    style={showCorrectOne &&
+                                    tank.name === correctTank.name
+                                        ? "background:none;background-color: #75ff6e"
+                                        : ""}
+                                    on:click|preventDefault={checkClick}
+                                    on:keypress
+                                >
+                                    <p>{tank.name}</p>
+                                </div>
+                            {/each}
+                        </div>
                     </div>
+                    <footer>
+                        <a
+                            href="https://github.com/ssebastianoo/TankLingo"
+                            target="_blank">GitHub</a
+                        >
+                    </footer>
                 </div>
             </div>
         </div>
@@ -170,7 +178,7 @@
     .points {
         text-align: right;
         padding: 0 20px;
-        color: white;
+        color: black;
         font-size: 20px;
     }
 
@@ -190,6 +198,9 @@
         padding: 20px;
         border-top-left-radius: 40px;
         border-top-right-radius: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         h2 {
             text-align: center;
@@ -214,6 +225,21 @@
                     text-align: center;
                     pointer-events: none;
                 }
+            }
+        }
+    }
+
+    footer {
+        text-align: center;
+
+        a {
+            color: unset;
+            text-decoration: none;
+            opacity: 0.5;
+
+            &:hover {
+                opacity: 1;
+                text-decoration: underline;
             }
         }
     }
