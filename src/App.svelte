@@ -198,6 +198,7 @@
                 justify-content: center;
                 border-radius: 50px;
                 padding: 10px;
+                cursor: pointer;
 
                 p {
                     max-width: 300px;
