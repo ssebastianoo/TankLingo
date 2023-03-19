@@ -17,6 +17,8 @@ self.addEventListener("install", (event) => {
                 "/tanks/8.png",
                 "/tanks/9.png",
                 "/tanks/10.png",
+                "/Brixton_Wood.otf",
+                "/Inter-Regular.ttf",
             ]);
         })()
     );

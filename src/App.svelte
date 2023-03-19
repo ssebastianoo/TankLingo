@@ -12,6 +12,7 @@
     $: points = 0;
 
     let loaded: boolean = false;
+    let showCorrectOne: boolean = false;
 
     function shuffle(array) {
         let currentIndex = array.length,
@@ -54,14 +55,16 @@
 
     function checkClick(e) {
         if (e.target.dataset.name === correctTank.name) {
-            e.target.style.backgroundColor = "green";
+            e.target.style.backgroundColor = "#75ff6e";
             points++;
         } else {
-            e.target.style.backgroundColor = "red";
+            e.target.style.backgroundColor = "#ff7a59";
+            showCorrectOne = true;
             points--;
         }
         setTimeout(() => {
             e.target.style.backgroundColor = "";
+            showCorrectOne = false;
             askTank();
         }, 1000);
     }
@@ -91,6 +94,10 @@
                         <div
                             class="option"
                             data-name={tank.name}
+                            style={showCorrectOne &&
+                            tank.name === correctTank.name
+                                ? "background-color: #75ff6e"
+                                : ""}
                             on:click|preventDefault={checkClick}
                             on:keypress
                         >
@@ -104,6 +111,11 @@
 </main>
 
 <style lang="scss">
+    @font-face {
+        font-family: "Brixton Wood";
+        src: url("/Brixton_Wood.otf");
+    }
+
     main {
         height: 100vh;
     }
@@ -116,7 +128,7 @@
     }
 
     .container {
-        min-height: calc(100vh - 79px);
+        min-height: calc(100vh - 120px);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -128,11 +140,20 @@
         margin: 0;
     }
 
+    h1 {
+        font-family: "Brixton Wood";
+        font-size: 80px;
+    }
+
     .points {
         text-align: right;
         padding: 0 20px;
         color: white;
         font-size: 20px;
+    }
+
+    .top {
+        height: calc(40vh - 120px);
     }
 
     .pic {
@@ -142,7 +163,7 @@
     }
 
     .guess {
-        margin-top: 20px;
+        height: calc(60vh - 120px);
         background-color: white;
         padding: 20px;
         border-top-left-radius: 40px;
