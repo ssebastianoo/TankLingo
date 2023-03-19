@@ -2,10 +2,7 @@
     import { onMount } from "svelte";
     import tanks from "./tanks.json";
 
-    type Tank = {
-        name: string;
-        file: string;
-    };
+    const production = import.meta.env.MODE === "production";
 
     $: correctTank = null;
     $: allTanks = null;
@@ -46,44 +43,52 @@
         askTank();
         loaded = true;
 
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker
-                .register("/service-worker.js", {
-                    scope: "/",
-                })
-                .then((registration) => {
-                    registration.update();
-                });
+        if (production) {
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker
+                    .register("/service-worker.js", {
+                        scope: "/",
+                    })
+                    .then((registration) => {
+                        registration.update();
+                    });
+            }
         }
     });
 
+    let canClick = true;
+
     function checkClick(e) {
-        if (e.target.dataset.name === correctTank.name) {
-            e.target.style.backgroundColor = "#75ff6e";
-            points++;
-        } else {
-            e.target.style.backgroundColor = "#ff7a59";
-            showCorrectOne = true;
-            points--;
+        if (canClick) {
+            if (e.target.dataset.name === correctTank.name) {
+                e.target.style.background = "#75ff6e";
+                points++;
+            } else {
+                e.target.style.background = "#ff7a59";
+                showCorrectOne = true;
+                points--;
+            }
+            canClick = false;
+            setTimeout(() => {
+                e.target.style.background = "";
+                showCorrectOne = false;
+                askTank();
+                canClick = true;
+            }, 1000);
         }
-        setTimeout(() => {
-            e.target.style.backgroundColor = "";
-            showCorrectOne = false;
-            askTank();
-        }, 1000);
     }
 </script>
 
 <main>
-    <header>
-        <h1>TankLingo</h1>
-    </header>
     {#if !loaded}
         <p>loading...</p>
     {:else}
         <div class="parent">
             <div class="container">
                 <div class="top">
+                    <header>
+                        <h1 class="title">TankLingo</h1>
+                    </header>
                     <p class="points">
                         {points}
                         {points === 1 ? "Point" : "Points"}
@@ -101,7 +106,7 @@
                                 data-name={tank.name}
                                 style={showCorrectOne &&
                                 tank.name === correctTank.name
-                                    ? "background-color: #75ff6e"
+                                    ? "background:none;background-color: #75ff6e"
                                     : ""}
                                 on:click|preventDefault={checkClick}
                                 on:keypress
@@ -126,13 +131,6 @@
         height: 100vh;
     }
 
-    header {
-        color: white;
-        display: flex;
-        align-items: center;
-        padding: 20px;
-    }
-
     .parent {
         display: flex;
         justify-content: center;
@@ -153,9 +151,20 @@
         margin: 0;
     }
 
-    h1 {
+    header {
+        display: flex;
+        justify-content: center;
+    }
+
+    .title {
         font-family: "Brixton Wood";
         font-size: 80px;
+        color: white;
+        margin: 10px 0 20px;
+        background: linear-gradient(to right, #7c6deb, #ee67a1, #ff9d39);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
     }
 
     .points {
@@ -166,7 +175,7 @@
     }
 
     .top {
-        min-height: calc(40vh - 120px);
+        min-height: calc(50vh);
     }
 
     .pic {
@@ -176,8 +185,8 @@
     }
 
     .guess {
-        min-height: calc(60vh - 120px);
-        background-color: white;
+        min-height: calc(50vh - 40px);
+        background-color: #0e0e0e;
         padding: 20px;
         border-top-left-radius: 40px;
         border-top-right-radius: 40px;
@@ -193,10 +202,10 @@
             gap: 20px;
 
             .option {
-                background-color: rgba(0, 0, 0, 7%);
+                background: linear-gradient(to right, #8933ff, #46d0ff);
                 display: flex;
                 justify-content: center;
-                border-radius: 50px;
+                border-radius: 12px;
                 padding: 10px;
                 cursor: pointer;
 

@@ -1,5 +1,3 @@
-$blue: #007cf8;
-
 @font-face {
     font-family: "Inter";
     src: url("/Inter-Regular.ttf");
@@ -8,17 +6,6 @@ $blue: #007cf8;
 body {
     min-height: 100vh;
     margin: 0;
-    background-color: $blue;
     font-family: "Inter";
-    background-size: 30px 30px;
-    background-image: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.5) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.5) 1px,
-            transparent 1px
-        );
+    color: white;
 }
