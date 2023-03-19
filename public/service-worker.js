@@ -34,7 +34,6 @@ self.addEventListener("fetch", (event) => {
             } else {
                 try {
                     // If the resource was not in the cache, try the network.
-                    console.log(event.request);
                     const fetchResponse = await fetch(event.request);
 
                     // Save the resource in the cache and return it.
