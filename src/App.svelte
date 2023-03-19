@@ -68,23 +68,30 @@
     {#if !loaded}
         <p>loading...</p>
     {:else}
-        <p class="points">{points} {points === 1 ? "point" : "points"}</p>
-        <div class="pic">
-            <img src={"/tanks/" + correctTank.file} alt="Tank" />
-        </div>
-        <div class="guess">
-            <h2>What's this tank?</h2>
-            <div class="options">
-                {#each allTanks as tank}
-                    <div
-                        class="option"
-                        data-name={tank.name}
-                        on:click|preventDefault={checkClick}
-                        on:keypress
-                    >
-                        <p>{tank.name}</p>
-                    </div>
-                {/each}
+        <div class="container">
+            <div class="top">
+                <p class="points">
+                    {points}
+                    {points === 1 ? "point" : "points"}
+                </p>
+                <div class="pic">
+                    <img src={"/tanks/" + correctTank.file} alt="Tank" />
+                </div>
+            </div>
+            <div class="guess">
+                <h2>What's this tank?</h2>
+                <div class="options">
+                    {#each allTanks as tank}
+                        <div
+                            class="option"
+                            data-name={tank.name}
+                            on:click|preventDefault={checkClick}
+                            on:keypress
+                        >
+                            <p>{tank.name}</p>
+                        </div>
+                    {/each}
+                </div>
             </div>
         </div>
     {/if}
@@ -100,6 +107,13 @@
         display: flex;
         align-items: center;
         padding: 20px;
+    }
+
+    .container {
+        min-height: calc(100vh - 79px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     h1,
@@ -119,14 +133,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 300px;
     }
 
     .guess {
         margin-top: 20px;
         background-color: white;
-        height: 100%;
-        align-items: centers;
         padding: 20px;
         border-top-left-radius: 40px;
         border-top-right-radius: 40px;
