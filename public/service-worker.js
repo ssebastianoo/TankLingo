@@ -7,6 +7,7 @@ self.addEventListener("install", (event) => {
             const cache = await caches.open(CACHE_NAME);
             cache.addAll([
                 "/",
+                "/offline.html",
                 "/tanks/1.png",
                 "/tanks/2.png",
                 "/tanks/3.png",
@@ -42,8 +43,8 @@ self.addEventListener("fetch", (event) => {
                     cache.put(event.request, fetchResponse.clone());
                     return fetchResponse;
                 } catch (e) {
-                    // If the resource was not in the cache and the network is unavailable, return a 404.
-                    return new Response("Not found", { status: 404 });
+                    // If the resource was not in the cache and the network is unavailable, show offline.html
+                    return caches.match("/offline.html");
                 }
             }
         })()
