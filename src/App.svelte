@@ -94,7 +94,11 @@
                         {points === 1 ? "Point" : "Points"}
                     </p>
                     <div class="pic">
-                        <img src={"/tanks/" + correctTank.file} alt="Tank" />
+                        <img
+                            src={"/tanks/" + correctTank.file}
+                            alt="Tank"
+                            height="250px"
+                        />
                     </div>
                 </div>
                 <div class="guess">
@@ -166,9 +170,9 @@
 
     .title {
         font-family: "Brixton Wood";
-        font-size: 80px;
+        font-size: 5em;
         color: white;
-        margin: 10px 0 20px;
+        margin: 20px 0 20px;
         background: linear-gradient(to right, #7c6deb, #ee67a1, #ff9d39);
         background-clip: text;
         -webkit-background-clip: text;
@@ -179,11 +183,11 @@
         text-align: right;
         padding: 0 20px;
         color: black;
-        font-size: 20px;
+        font-size: 1.2em;
     }
 
     .top {
-        min-height: calc(50vh);
+        min-height: 50vh;
     }
 
     .pic {
@@ -201,10 +205,12 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        font-size: 0.9em;
 
         h2 {
+            font-size: 1.3rem;
             text-align: center;
-            margin: 10px 0 30px;
+            margin: 0 0 20px;
         }
 
         .options {
@@ -230,6 +236,7 @@
     }
 
     footer {
+        margin-top: 20px;
         text-align: center;
 
         a {
