@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tanklingo.vercel.app/sitemap.xml
