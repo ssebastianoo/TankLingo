@@ -249,4 +249,10 @@
             }
         }
     }
+
+    @media (max-height: 660px) {
+        .pic img {
+            height: 140px;
+        }
+    }
 </style>
