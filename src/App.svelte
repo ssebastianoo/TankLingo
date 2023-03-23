@@ -182,7 +182,6 @@
     .points {
         text-align: right;
         padding: 0 20px;
-        color: black;
         font-size: 1.2em;
     }
 
