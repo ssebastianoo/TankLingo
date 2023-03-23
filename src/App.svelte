@@ -97,7 +97,7 @@
                         <img
                             src={"/tanks/" + correctTank.file}
                             alt="Tank"
-                            height="250px"
+                            height="170px"
                         />
                     </div>
                 </div>
