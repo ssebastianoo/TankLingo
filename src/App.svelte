@@ -43,16 +43,20 @@
         askTank();
         loaded = true;
 
-        if (production) {
-            if ("serviceWorker" in navigator) {
-                navigator.serviceWorker
-                    .register("/service-worker.js", {
-                        scope: "/",
-                    })
-                    .then((registration) => {
-                        registration.update();
-                    });
-            }
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+                .register("/service-worker.js", {
+                    scope: "/",
+                })
+                .then((registration) => {
+                    registration.update();
+                });
+        }
+
+        if (!matchMedia("(display-mode: browser)").matches) {
+            console.log("aa");
+            window.moveTo(540, 46);
+            window.resizeTo(500, 744);
         }
     });
 
@@ -229,6 +233,10 @@
                     max-width: 300px;
                     text-align: center;
                     pointer-events: none;
+                }
+
+                &:hover {
+                    outline: 2px solid white;
                 }
             }
         }
