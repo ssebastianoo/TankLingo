@@ -252,7 +252,19 @@
 
     @media (max-height: 660px) {
         .pic img {
-            height: 140px;
+            height: 120px;
+        }
+
+        .top {
+            min-height: 45vh;
+        }
+
+        .guess {
+            min-height: calc(55vh - 40px);
+        }
+
+        .title {
+            font-size: 4em;
         }
     }
 </style>
